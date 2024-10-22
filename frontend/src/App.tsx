@@ -4,8 +4,6 @@ import Student from "./Components/Student/Student";
 import CreateStudent from "./Components/Student/CreateStudent";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <BrowserRouter>

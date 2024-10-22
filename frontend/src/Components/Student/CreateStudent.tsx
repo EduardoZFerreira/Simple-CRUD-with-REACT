@@ -1,13 +1,20 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CreateStudent = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    axios.post("", { name: name, email: email }).then((res) => {});
+    axios
+      .post("http://localhost:8081/student", { name: name, email: email })
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      });
   };
 
   return (
