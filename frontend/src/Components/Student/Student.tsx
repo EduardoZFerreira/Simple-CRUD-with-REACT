@@ -7,7 +7,7 @@ const Student = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081")
+      .get("http://localhost:8081/student")
       .then((res) => setStudents(res.data))
       .catch((err) => console.log(err));
   }, []);
