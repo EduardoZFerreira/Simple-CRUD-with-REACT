@@ -28,10 +28,29 @@ app.get("/student", (req, res) => {
     });
 });
 
+
+app.get("/student/:id", (req, res) => {
+    const query = "SELECT * FROM student WHERE id = ?";
+
+    db.query(query, [req.params.id], (err, data) => {
+        if (err) return res.json({msg: err.message});
+        else return res.json(data);
+    });
+});
+
 app.post("/student", (req, res) => {
     const sql = "INSERT INTO student (`name`, `email`) VALUES (?)";
     const values = [req.body.name, req.body.email];
     db.query(sql, [values], (err, data) => {
+        if (err) return res.json({msg: err.message});
+        else return res.json(data);
+    });
+});
+
+app.put("/student/:id", (req, res) => {
+    const sql = "UPDATE student SET name = ?, email = ? where id = ?";
+    const values = [req.body.name, req.body.email];
+    db.query(sql, [...values, req.params.id], (err, data) => {
         if (err) return res.json({msg: err.message});
         else return res.json(data);
     });

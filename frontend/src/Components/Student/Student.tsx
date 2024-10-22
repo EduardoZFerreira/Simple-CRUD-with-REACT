@@ -31,7 +31,12 @@ const Student = () => {
                   <td>{student.name}</td>
                   <td>{student.email}</td>
                   <td>
-                    <button className="btn btn-primary">Edit</button>
+                    <Link
+                      to={`/create/${student.id}`}
+                      className="btn btn-primary"
+                    >
+                      Edit
+                    </Link>
                     <button className="btn btn-danger">Delete</button>
                   </td>
                 </tr>

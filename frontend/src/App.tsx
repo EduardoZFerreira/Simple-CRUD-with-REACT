@@ -9,6 +9,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Student />}></Route>
           <Route path="/create" element={<CreateStudent />}></Route>
+          <Route path="/create/:id" element={<CreateStudent />}></Route>
         </Routes>
       </BrowserRouter>
     </>
