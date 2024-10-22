@@ -5,12 +5,23 @@ import { Link } from "react-router-dom";
 const Student = () => {
   const [students, setStudents] = useState([]);
 
-  useEffect(() => {
+  const fecthStudents = () => {
     axios
       .get("http://localhost:8081/student")
       .then((res) => setStudents(res.data))
       .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    fecthStudents();
   }, []);
+
+  const handleDelete = (id: Number) => {
+    axios.delete("http://localhost:8081/student/" + id).then((res) => {
+      alert("Deleting student " + id);
+      fecthStudents();
+    });
+  };
 
   return (
     <>
@@ -37,7 +48,14 @@ const Student = () => {
                     >
                       Edit
                     </Link>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      onClick={(e) => {
+                        handleDelete(student.id);
+                      }}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

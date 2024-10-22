@@ -56,6 +56,14 @@ app.put("/student/:id", (req, res) => {
     });
 });
 
+app.delete("/student/:id", (req, res) => {
+    const sql = "DELETE FROM student where id = ?";
+    db.query(sql, [req.params.id], (err, data) => {
+        if (err) return res.json({msg: err.message});
+        else return res.json(data);
+    });
+});
+
 app.listen(8081, () => {
     console.log("listening");
 });
