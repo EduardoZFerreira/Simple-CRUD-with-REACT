@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Student from "./Components/Student/Student";
 import CreateStudent from "./Components/Student/CreateStudent";
