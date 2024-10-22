@@ -1,10 +1,12 @@
 import axios, { AxiosResponse } from "axios";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const CreateStudent = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+  });
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,20 +18,40 @@ const CreateStudent = () => {
 
   const create = () => {
     axios
-      .post("http://localhost:8081/student", { name: name, email: email })
+      .post("http://localhost:8081/student", { ...formData })
       .then(handleResponse);
   };
 
   const update = () => {
     axios
-      .put("http://localhost:8081/student/" + id, { name: name, email: email })
+      .put("http://localhost:8081/student/" + id, { ...formData })
       .then(handleResponse);
+  };
+
+  const fecthStudent = () => {
+    useEffect(() => {
+      axios.get("http://localhost:8081/student/" + id).then((res) => {
+        setFormData({
+          name: res.data[0].name,
+          email: res.data[0].email,
+        });
+      });
+    }, []);
   };
 
   const handleResponse = (res: AxiosResponse) => {
     console.log(res);
     navigate("/");
   };
+
+  const handleChange = (event: ChangeEvent) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  if (id) fecthStudent();
 
   return (
     <>
@@ -42,8 +64,10 @@ const CreateStudent = () => {
               <input
                 type="text"
                 className="form-control"
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleChange}
                 placeholder="Fullname..."
+                value={formData.name}
+                name="name"
               />
             </div>
             <div className="mb-3">
@@ -52,8 +76,10 @@ const CreateStudent = () => {
                 type="email"
                 className="form-control"
                 aria-describedby="emailHelp"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
                 placeholder="email@domain.com"
+                value={formData.email}
+                name="email"
               />
               <div id="emailHelp" className="form-text">
                 We'll never share your email with anyone else.
