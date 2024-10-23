@@ -4,6 +4,7 @@ import {
   FastifyRequest,
   FastifyReply,
 } from "fastify";
+import { StudentController } from "./controllers/StudentController";
 
 export async function routes(
   fastify: FastifyInstance,
@@ -13,6 +14,13 @@ export async function routes(
     "/healthcheck",
     async (request: FastifyRequest, reply: FastifyReply) => {
       return { OK: true };
+    }
+  );
+
+  fastify.post(
+    "/student",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      return new StudentController().handle(request, reply);
     }
   );
 }
