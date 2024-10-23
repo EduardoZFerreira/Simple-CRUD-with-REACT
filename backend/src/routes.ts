@@ -30,4 +30,11 @@ export async function routes(
       return new StudentController().handle(request, reply);
     }
   );
+
+  fastify.delete(
+    "/student",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      return new StudentController().delete(request, reply);
+    }
+  );
 }

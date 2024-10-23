@@ -21,6 +21,16 @@ class StudentService {
     const students = await prismaClient.student.findMany();
     return students;
   }
+
+  async delete(id: number) {
+    await prismaClient.student.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    return { status: "OK" };
+  }
 }
 
 export { StudentService };
