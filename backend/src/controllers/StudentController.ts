@@ -19,7 +19,7 @@ class StudentController {
   }
 
   async delete(request: FastifyRequest, reply: FastifyReply) {
-    const { id } = request.query as { id: string };
+    const { id } = request.params as { id: string };
     const studentService = new StudentService();
 
     const response = await studentService.delete(+id);

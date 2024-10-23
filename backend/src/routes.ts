@@ -32,7 +32,7 @@ export async function routes(
   );
 
   fastify.delete(
-    "/student",
+    "/student/:id",
     async (request: FastifyRequest, reply: FastifyReply) => {
       return new StudentController().delete(request, reply);
     }
