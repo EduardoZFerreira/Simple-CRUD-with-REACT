@@ -10,6 +10,13 @@ class StudentController {
 
     reply.send(student);
   }
+
+  async list(request: FastifyRequest, reply: FastifyReply) {
+    const studentService = new StudentService();
+    const students = await studentService.list();
+
+    reply.send(students);
+  }
 }
 
 export { StudentController };

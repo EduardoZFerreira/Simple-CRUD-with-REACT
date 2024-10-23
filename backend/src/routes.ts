@@ -17,6 +17,13 @@ export async function routes(
     }
   );
 
+  fastify.get(
+    "/student",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      return new StudentController().list(request, reply);
+    }
+  );
+
   fastify.post(
     "/student",
     async (request: FastifyRequest, reply: FastifyReply) => {

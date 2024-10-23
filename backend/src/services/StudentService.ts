@@ -16,6 +16,11 @@ class StudentService {
 
     return student;
   }
+
+  async list() {
+    const students = await prismaClient.student.findMany();
+    return students;
+  }
 }
 
 export { StudentService };
